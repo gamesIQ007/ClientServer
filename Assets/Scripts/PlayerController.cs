@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,7 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerStats playerStats;
     public PlayerStats PlayerStats => playerStats;
 
-    [SerializeField] private ServerConnection connection;
+    [SerializeField] private RequestCollection requestCollection;
 
     private void Start()
     {
@@ -27,13 +26,11 @@ public class PlayerController : MonoBehaviour
 
     public async void UpdatePlayerStats()
     {
-        try
-        {
-            playerStats = await connection.RequestPlayerStatsAsync();
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-        }
+        playerStats = await requestCollection.UpdatePlayerStatsAsync(playerStats);
+    }
+
+    public async void UpgradeLevel()
+    {
+        playerStats = await requestCollection.UpgradeLevel(playerStats);
     }
 }
