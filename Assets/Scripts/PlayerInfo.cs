@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
@@ -29,5 +27,11 @@ public class PlayerInfo : MonoBehaviour
         Debug.Log(sb);
 
         return sb.ToString();
+    }
+
+    public void SetPlayerInfo(string name, string password)
+    {
+        this.name = name;
+        this.password = password;
     }
 }
