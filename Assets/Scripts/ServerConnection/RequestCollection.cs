@@ -34,4 +34,18 @@ public class RequestCollection : MonoBehaviour
 
         return stats;
     }
+
+    public async Task<PlayerStats> AddGold(PlayerStats playerStats)
+    {
+        string responseMessage = await connection.RequestAsync("/playerStats", "POST", "AddGold");
+
+        PlayerStats stats = playerStats;
+
+        if (responseMessage != "")
+        {
+            stats = JsonUtility.FromJson<PlayerStats>(responseMessage);
+        }
+
+        return stats;
+    }
 }

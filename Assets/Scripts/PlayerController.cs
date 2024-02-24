@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -32,5 +33,14 @@ public class PlayerController : MonoBehaviour
     public async void UpgradeLevel()
     {
         playerStats = await requestCollection.UpgradeLevel(playerStats);
+    }
+
+    public async void AddStatsAsync()
+    {
+        if (enabled == false) return;
+
+        playerStats.Gold += playerStats.Level;
+
+        playerStats = await requestCollection.AddGold(playerStats);
     }
 }
